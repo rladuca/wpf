@@ -4,6 +4,7 @@
       System.Xaml;
       PresentationBuildTasks;
       PresentationCore;
+      DirectWriteForwarder;
       PresentationFramework;
       ReachFramework;
       UIAutomationClient;
@@ -107,6 +108,7 @@
       These assemblies have the public key id 31bf3856ad364e35 (MicrosoftShared)
     -->
     <UseMicrosoftSharedKeyId>
+      DirectWriteForwarder;
       PresentationBuildTasks;
       PresentationCore;
       PresentationCore-ref;
