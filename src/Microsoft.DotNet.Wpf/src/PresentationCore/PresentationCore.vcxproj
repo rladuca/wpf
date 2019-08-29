@@ -59,11 +59,13 @@
   <ItemGroup>
     <ProjectReference Include="$(WpfSourceDir)WindowsBase\WindowsBase.csproj" />
     <ProjectReference Include="$(WpfSourceDir)System.Xaml\System.Xaml.csproj" />
-    <ProjectReference Include="DirectWriteForwarder\DirectWriteForwarder.vcxproj">
+    <!-- TODO: Replace with module constructor injector -->
+    <!--<ProjectReference Include="DirectWriteForwarder\DirectWriteForwarder.vcxproj">
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <OutputItemType>Link</OutputItemType>
-    </ProjectReference>
+    </ProjectReference>-->
+    <ProjectReference Include="$(WpfSourceDir)DirectWriteForwarder\DirectWriteForwarder.vcxproj" />
     <ProjectReference Include="CSharp\PresentationCoreCSharp.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <OutputItemType>Link</OutputItemType>
