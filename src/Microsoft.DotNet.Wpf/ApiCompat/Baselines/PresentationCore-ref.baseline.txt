@@ -1,5 +1,4 @@
 Compat issues with assembly PresentationCore:
-TypesMustExist : Type 'MS.Internal.TrueTypeSubsetter' does not exist in the implementation but it does exist in the contract.
 CannotChangeAttribute : Attribute 'System.AttributeUsageAttribute' on 'System.Windows.LocalizabilityAttribute' changed from '[AttributeUsageAttribute(412, AllowMultiple=false, Inherited=true)]' in the contract to '[AttributeUsageAttribute(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Struct, AllowMultiple=false, Inherited=true)]' in the implementation.
 CannotRemoveAttribute : Attribute 'MS.Internal.PresentationCore.FriendAccessAllowedAttribute' exists on 'System.Windows.Input.InputEventArgs' in the contract but not the implementation.
 MembersMustExist : Member 'System.Windows.Media.Brush.AddRefOnChannelCore(System.Windows.Media.Composition.DUCE.Channel)' does not exist in the implementation but it does exist in the contract.
