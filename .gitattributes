@@ -1,9 +1,12 @@
-*           text eol=lf
+*           text=auto
 
-*.xlf       text eol=crlf
+*.xaml      text eol=crlf
 
 *.sln       text eol=crlf
 *.csproj    text eol=crlf
 *.vcxproj   text eol=crlf
 
-**/ApiCompat/Baselines/**   text eol=crlf
+*.png   binary
+*.ttf   binary
+*.doc   binary
+*.docx  binary
