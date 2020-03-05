@@ -1,0 +1,9 @@
+*           text eol=lf
+
+*.xlf       text eol=crlf
+
+*.sln       text eol=crlf
+*.csproj    text eol=crlf
+*.vcxproj   text eol=crlf
+
+**/ApiCompat/Baselines/**   text eol=crlf
