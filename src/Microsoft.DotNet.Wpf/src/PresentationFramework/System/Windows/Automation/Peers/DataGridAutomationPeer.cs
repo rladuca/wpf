@@ -137,7 +137,17 @@ namespace System.Windows.Automation.Peers
         {
             get
             {
-                return this.OwningDataGrid.Columns.Count;
+                int visibleColumnCount = 0;
+
+                foreach(var col in OwningDataGrid.Columns)
+                {
+                    if (((Visibility)col.GetValue(UIElement.VisibilityProperty)) == Visibility.Visible)
+                    {
+                        visibleColumnCount++;
+                    }
+                }
+
+                return visibleColumnCount;
             }
         }
 
