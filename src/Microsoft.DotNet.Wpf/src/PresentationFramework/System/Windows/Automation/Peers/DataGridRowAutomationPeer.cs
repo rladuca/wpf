@@ -95,6 +95,59 @@ namespace System.Windows.Automation.Peers
             }
         }
 
+        protected override int GetSizeOfSetCore()
+        {
+            int sizeOfSet = base.GetSizeOfSetCore();
+
+            if (sizeOfSet == AutomationProperties.AutomationSizeOfSetDefault)
+            {
+                var parent = ItemsControl.ItemsControlFromItemContainer(OwningDataGridRow);
+                int rawSizeOfSet = sizeOfSet = ItemAutomationPeer.GetSizeOfSetFromItemsControl(parent, OwningDataGridRow);
+
+                for (int i = 0; i < rawSizeOfSet; i++)
+                {
+                    var row = parent.ItemContainerGenerator.ContainerFromIndex(i);
+
+                    if (row != null
+                       && ((Visibility)row.GetValue(DataGridRow.VisibilityProperty)) != Visibility.Visible)
+                    {
+                        --sizeOfSet;
+                    }
+                }
+            }
+
+            return sizeOfSet;
+        }
+
+        protected override int GetPositionInSetCore()
+        {
+            int positionInSet = base.GetPositionInSetCore();
+
+            if (positionInSet == AutomationProperties.AutomationPositionInSetDefault)
+            {
+                var parent = ItemsControl.ItemsControlFromItemContainer(OwningDataGridRow);
+                int rawPositionInSet = positionInSet = ItemAutomationPeer.GetPositionInSetFromItemsControl(parent, OwningDataGridRow.Item);
+
+                for (int i = 0; i < rawPositionInSet; i++)
+                {
+                    var row = parent.ItemContainerGenerator.ContainerFromIndex(i);
+
+                    if(row == OwningDataGridRow)
+                    {
+                        break;
+                    }    
+
+                    if (row != null
+                       && ((Visibility)row.GetValue(DataGridRow.VisibilityProperty)) != Visibility.Visible)
+                    {
+                        --positionInSet;
+                    }
+                }
+            }
+
+            return positionInSet;
+        }
+
         #endregion
 
         #region Private helpers
