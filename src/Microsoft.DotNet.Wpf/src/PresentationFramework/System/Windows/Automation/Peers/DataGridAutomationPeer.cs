@@ -4,6 +4,7 @@
 
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
@@ -139,9 +140,9 @@ namespace System.Windows.Automation.Peers
             {
                 int visibleColumnCount = 0;
 
-                foreach(var col in OwningDataGrid.Columns)
+                foreach (var col in OwningDataGrid.Columns)
                 {
-                    if (((Visibility)col.GetValue(UIElement.VisibilityProperty)) == Visibility.Visible)
+                    if (((Visibility)col.GetValue(DataGridColumn.VisibilityProperty)) == Visibility.Visible)
                     {
                         visibleColumnCount++;
                     }
@@ -155,7 +156,27 @@ namespace System.Windows.Automation.Peers
         {
             get
             {
-                return this.OwningDataGrid.Items.Count;
+                int rowCount = this.OwningDataGrid.Items.Count;
+
+                var editableItems = (IEditableCollectionView)this.OwningDataGrid.Items;
+
+                if (editableItems.NewItemPlaceholderPosition != NewItemPlaceholderPosition.None)
+                {
+                    --rowCount;
+                }
+
+                for (int i = 0; i < rowCount; i++)
+                {
+                    var row = this.OwningDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                    if (row != null
+                        && ((Visibility)row.GetValue(DataGridRow.VisibilityProperty)) != Visibility.Visible)
+                    {
+                        --rowCount;
+                    }
+                }
+
+                return rowCount;
             }
         }
 
