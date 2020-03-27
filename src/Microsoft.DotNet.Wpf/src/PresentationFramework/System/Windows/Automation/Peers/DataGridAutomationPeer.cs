@@ -155,7 +155,7 @@ namespace System.Windows.Automation.Peers
         int IGridProvider.RowCount
         {
             get
-           {
+            {
                 int rowCount = this.OwningDataGrid.Items.Count;
 
                 var editableItems = (IEditableCollectionView)this.OwningDataGrid.Items;
@@ -163,6 +163,17 @@ namespace System.Windows.Automation.Peers
                 if (editableItems.NewItemPlaceholderPosition != NewItemPlaceholderPosition.None)
                 {
                     --rowCount;
+                }
+
+                for (int i = 0; i < rowCount; i++)
+                {
+                    var row = this.OwningDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                    if (row != null
+                        && ((Visibility)row.GetValue(DataGridRow.VisibilityProperty)) != Visibility.Visible)
+                    {
+                        --rowCount;
+                    }
                 }
 
                 return rowCount;
