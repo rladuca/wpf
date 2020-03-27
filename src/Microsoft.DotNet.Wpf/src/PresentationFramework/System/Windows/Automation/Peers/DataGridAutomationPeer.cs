@@ -158,13 +158,6 @@ namespace System.Windows.Automation.Peers
             {
                 int rowCount = this.OwningDataGrid.Items.Count;
 
-                var editableItems = (IEditableCollectionView)this.OwningDataGrid.Items;
-
-                if (editableItems.NewItemPlaceholderPosition != NewItemPlaceholderPosition.None)
-                {
-                    --rowCount;
-                }
-
                 for (int i = 0; i < rowCount; i++)
                 {
                     var row = this.OwningDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
