@@ -4,6 +4,7 @@
 
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Automation;
 using System.Windows.Automation.Provider;
@@ -154,8 +155,17 @@ namespace System.Windows.Automation.Peers
         int IGridProvider.RowCount
         {
             get
-            {
-                return this.OwningDataGrid.Items.Count;
+           {
+                int rowCount = this.OwningDataGrid.Items.Count;
+
+                var editableItems = (IEditableCollectionView)this.OwningDataGrid.Items;
+
+                if (editableItems.NewItemPlaceholderPosition != NewItemPlaceholderPosition.None)
+                {
+                    --rowCount;
+                }
+
+                return rowCount;
             }
         }
 
